@@ -1,5 +1,5 @@
 /* In this repo your job is to write functions to make each function call work properly.
-Below is a sample problem 
+Below is a sample problem
 
   //code here for sayHi
 
@@ -9,7 +9,7 @@ Below is a sample problem
    
 
 and what you should write is the favNum function that makes the code above work, 
-    
+
     
    var sayHi = function(str, cb){
     cb(str);
@@ -25,6 +25,10 @@ and what you should write is the favNum function that makes the code above work,
 
 
   //Code Here for first
+
+var first = function(arr, cb){
+    cb(arr[0]);
+}
   
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
@@ -39,6 +43,9 @@ first(names, function(firstName){
 
 
   //Code Here for last
+var last = function(arr, cb){
+    cb(arr[arr.length - 1]);
+}
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 last(names, function(lastName){
@@ -57,7 +64,9 @@ last(names, function(lastName){
 
 
   //Code Here for multiply
-
+var multiply = function(firstNum, secondNum, cb){
+    cb(firstNum * secondNum);
+}
 multiply(4, 3, function(answer){
   console.log('The answer is ', answer); //should console.log 12
 })
@@ -73,7 +82,15 @@ multiply(4, 3, function(answer){
 
 
   //Code Here for contains
-
+var contains = function(arr, name, cb){
+    var isPresent = false;
+    arr.forEach(function(input, i){
+        if(input === name){
+            isPresent = true;
+        };
+    })
+    cb(isPresent)
+}
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 contains(names, 'Colt', function(result){
   if(result === true){
@@ -93,7 +110,25 @@ contains(names, 'Colt', function(result){
 
 
     //Code Here for uniq
-
+var uniq = function(arr, cb){
+    var uniqueArr = [];
+    arr.forEach(function(input, i){
+        if (uniqueArr.length === 0){
+            uniqueArr.push(input);
+        } else {
+            var inArray = false;
+            uniqueArr.forEach(function(input2, i2){
+                if(input === input2){
+                    inArray = true;
+                }
+            })
+            if (inArray === false){
+                uniqueArr.push(input);
+            }
+        }
+    })
+    cb(uniqueArr)
+ }
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
@@ -109,6 +144,12 @@ uniq(names, function(uniqArr){
 
 
     //Code Here for each
+
+function each(arr, cb ){
+    arr.forEach(function(input, i){
+        cb(arr[i], i);
+    })
+}
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 each(names, function(item, indice){
@@ -126,7 +167,13 @@ each(names, function(item, indice){
 
 
  //code here for getUserById
-
+function getUserById(arr, id, cb){
+    arr.forEach(function(input, i){
+        if (input.id === id){
+            cb(arr[i]);
+        }
+    });
+}
 var users = [
   {
     id: '12d',
@@ -151,3 +198,5 @@ var users = [
 getUserById(users, '16t', function(user){
   console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address); 
 });
+/*
+debugger pauses console so that you can see what is happening*/
