@@ -200,3 +200,53 @@ getUserById(users, '16t', function(user){
 });
 /*
 debugger pauses console so that you can see what is happening*/
+
+function callbackAdd(a, b, cb){
+    cb(a+b);
+}
+
+
+callbackAdd(1,2,function(result){
+    console.log(result);
+})
+
+
+doThreeThings(
+    function() {
+        return 10;
+    },
+    function(lastResult) {
+        return lastResult + 10;
+    },
+    function(lastResult) {
+        Console.log(lastResult);
+    }
+})
+
+function doThreeThings(cb1, cb2, cb3){
+    setTimeout(function() {
+        var result1 = cb1();
+    }, 100)
+    setTimeout(function() {
+        var result2 = cb2(result1);
+    }, 200)
+    settimeout(function){
+        cb3(result2);''
+    }, 200)
+})
+
+class Ferrari{
+    constructor(color, hasLeather){
+        this.color = color;
+        this.hasLeather = hasLeather;
+        this.hasBugs = true;
+        this.gasTank = 100;
+    }
+
+    wipeWindshield(){
+        this.hasBugs = false;
+    }
+}
+
+var ferrariInstance1 = new Ferrari('blue', true);
+console.log(ferrariInstance1)
